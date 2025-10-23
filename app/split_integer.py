@@ -1,4 +1,4 @@
-from app.split_integer import split_integer  # <-- ОСНОВНЕ ВИПРАВЛЕННЯ
+
 
 
 def test_split_integer_single_part() -> None:
