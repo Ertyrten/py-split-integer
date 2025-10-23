@@ -1,7 +1,9 @@
-from typing import List  # ## ПОКРАЩЕНО: Для сумісності зі старими версіями Python
+from typing import List
 
 
-def split_integer(value: int, number_of_parts: int) -> List[int]:
+def split_integer(
+    value: int, number_of_parts: int
+) -> List[int]:
     """
     Splits an integer into a specified number of parts.
 
