@@ -1,21 +1,32 @@
-from app.split_integer import split_integer
+import pytest
+from app.main import split_integer  # Припускаємо, що функція в app/main.py
 
 
-def test_sum_of_the_parts_should_be_equal_to_value() -> None:
-    pass
+# Тест на основі прикладу: split_integer(8, 1) == [8]
+def test_split_integer_single_part():
+    assert split_integer(8, 1) == [8]
 
 
-def test_should_split_into_equal_parts_when_value_divisible_by_parts() -> None:
-    pass
+# Тест на основі прикладу: split_integer(6, 2) == [3, 3]
+def test_split_integer_even_division():
+    assert split_integer(6, 2) == [3, 3]
 
 
-def test_should_return_part_equals_to_value_when_split_into_one_part() -> None:
-    pass
+# Тест на основі прикладу: split_integer(17, 4) == [4, 4, 4, 5]
+def test_split_integer_small_uneven_division():
+    assert split_integer(17, 4) == [4, 4, 4, 5]
 
 
-def test_parts_should_be_sorted_when_they_are_not_equal() -> None:
-    pass
+# Тест на основі прикладу: split_integer(32, 6) == [5, 5, 5, 5, 6, 6]
+def test_split_integer_larger_uneven_division():
+    assert split_integer(32, 6) == [5, 5, 5, 5, 6, 6]
 
 
-def test_should_add_zeros_when_value_is_less_than_number_of_parts() -> None:
-    pass
+# Додатковий тест: випадок, коли значення менше, ніж кількість частин
+def test_split_integer_value_less_than_parts():
+    assert split_integer(3, 5) == [0, 0, 1, 1, 1]
+
+
+# Додатковий тест: ідеальне ділення
+def test_split_integer_perfect_division():
+    assert split_integer(100, 10) == [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
