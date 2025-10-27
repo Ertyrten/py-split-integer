@@ -4,24 +4,32 @@ from app.split_integer import split_integer
 
 # --- Конкретні, детерміновані тести для читабельності ---
 
-def test_single_part() -> None:
+def test_split_into_single_part() -> None:
     """Перевіряє випадок з однією частиною."""
     assert split_integer(8, 1) == [8]
 
 
-def test_even_division() -> None:
+def test_split_evenly_when_divisible() -> None:
     """Перевіряє випадок рівного поділу."""
     assert split_integer(6, 2) == [3, 3]
 
 
-def test_uneven_division() -> None:
+def test_split_unevenly() -> None:
     """Перевіряє загальний випадок нерівного поділу."""
     assert split_integer(17, 4) == [4, 4, 4, 5]
 
 
 def test_value_equals_number_of_parts() -> None:
-    """Перевіряє граничний випадок, коли value == number_of_parts."""
-    assert split_integer(5, 5) == [1, 1, 1, 1, 1]
+    """Перевіряє властивість, що при n/n результат - це n одиниць."""
+    n = 5
+    result = split_integer(n, n)
+    assert len(result) == n
+    assert all(part == 1 for part in result)
+
+
+def test_value_less_than_parts_produces_zeros() -> None:
+    """Перевіряє, що для 3/5 результат містить нулі: [0, 0, 1, 1, 1]."""
+    assert split_integer(3, 5) == [0, 0, 1, 1, 1]
 
 
 # --- Властивісний тест для перевірки загальних правил ---
@@ -30,7 +38,6 @@ def test_value_equals_number_of_parts() -> None:
     "value, number_of_parts",
     [
         (32, 6),     # Загальний випадок
-        (3, 5),      # Значення менше, ніж кількість частин
         (100, 10),   # Ідеальне ділення
         (0, 3),      # Нульове значення
         (25, 4),     # Ще один загальний випадок
@@ -55,6 +62,6 @@ def test_split_integer_properties(value: int, number_of_parts: int) -> None:
 
     # Властивість 4: Результат має бути відсортовано
     assert result == sorted(result)
-
+    
     # Властивість 5: Всі елементи - цілі невід'ємні числа
     assert all(isinstance(x, int) and x >= 0 for x in result)
