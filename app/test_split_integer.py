@@ -19,6 +19,11 @@ def test_uneven_division() -> None:
     assert split_integer(17, 4) == [4, 4, 4, 5]
 
 
+def test_value_equals_number_of_parts() -> None:
+    """Перевіряє граничний випадок, коли value == number_of_parts."""
+    assert split_integer(5, 5) == [1, 1, 1, 1, 1]
+
+
 # --- Властивісний тест для перевірки загальних правил ---
 
 @pytest.mark.parametrize(
