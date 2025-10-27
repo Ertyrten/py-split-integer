@@ -40,10 +40,3 @@ def test_split_integer_properties(value: int, number_of_parts: int) -> None:
 
     # 4. Результат має бути відсортовано
     assert result == sorted(result)
-
-    # 3. Перевірка, що різниця між max і min не більше 1
-    if len(result) > 1:
-        assert max(result) - min(result) <= 1
-
-    # 4. Перевірка, що результат відсортовано
-    assert result == sorted(result)
