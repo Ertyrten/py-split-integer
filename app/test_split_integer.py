@@ -21,9 +21,10 @@ def test_split_unevenly() -> None:
 
 def test_value_equals_number_of_parts() -> None:
     """Перевіряє властивість, що при n/n результат - це n одиниць."""
-    n = 5
-    result = split_integer(n, n)
-    assert len(result) == n
+    # ВИПРАВЛЕНО: 'n' замінено на 'parts_count'
+    parts_count = 5
+    result = split_integer(parts_count, parts_count)
+    assert len(result) == parts_count
     assert all(part == 1 for part in result)
 
 
@@ -37,10 +38,10 @@ def test_value_less_than_parts_produces_zeros() -> None:
 @pytest.mark.parametrize(
     "value, number_of_parts",
     [
-        (32, 6),     # Загальний випадок
-        (100, 10),   # Ідеальне ділення
-        (0, 3),      # Нульове значення
-        (25, 4),     # Ще один загальний випадок
+        (32, 6),
+        (100, 10),
+        (0, 3),
+        (25, 4),
     ]
 )
 def test_split_integer_properties(value: int, number_of_parts: int) -> None:
@@ -50,18 +51,11 @@ def test_split_integer_properties(value: int, number_of_parts: int) -> None:
     """
     result = split_integer(value, number_of_parts)
 
-    # Властивість 1: Кількість частин має бути правильною
     assert len(result) == number_of_parts
-
-    # Властивість 2: Сума частин має дорівнювати вихідному значенню
     assert sum(result) == value
 
-    # Властивість 3: Різниця між max і min не більше 1
     if len(result) > 1:
         assert max(result) - min(result) <= 1
 
-    # Властивість 4: Результат має бути відсортовано
     assert result == sorted(result)
-    
-    # Властивість 5: Всі елементи - цілі невід'ємні числа
     assert all(isinstance(x, int) and x >= 0 for x in result)
