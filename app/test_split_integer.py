@@ -55,3 +55,6 @@ def test_split_integer_properties(value: int, number_of_parts: int) -> None:
 
     # Властивість 4: Результат має бути відсортовано
     assert result == sorted(result)
+    
+    # Властивість 5: Всі елементи - цілі невід'ємні числа
+    assert all(isinstance(x, int) and x >= 0 for x in result)
