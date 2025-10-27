@@ -2,24 +2,33 @@ import pytest
 from app.split_integer import split_integer
 
 
-def test_specific_examples() -> None:
-    """
-    Перевіряє конкретні приклади, наведені в умові завдання,
-    для швидкої та зрозумілої перевірки регресій.
-    """
-    assert split_integer(6, 2) == [3, 3]
-    assert split_integer(17, 4) == [4, 4, 4, 5]
-    assert split_integer(32, 6) == [5, 5, 5, 5, 6, 6]
+# --- Конкретні, детерміновані тести для читабельності ---
 
+def test_single_part() -> None:
+    """Перевіряє випадок з однією частиною."""
+    assert split_integer(8, 1) == [8]
+
+
+def test_even_division() -> None:
+    """Перевіряє випадок рівного поділу."""
+    assert split_integer(6, 2) == [3, 3]
+
+
+def test_uneven_division() -> None:
+    """Перевіряє загальний випадок нерівного поділу."""
+    assert split_integer(17, 4) == [4, 4, 4, 5]
+
+
+# --- Властивісний тест для перевірки загальних правил ---
 
 @pytest.mark.parametrize(
     "value, number_of_parts",
     [
-        (8, 1),      # Одна частина
+        (32, 6),     # Загальний випадок
         (3, 5),      # Значення менше, ніж кількість частин
         (100, 10),   # Ідеальне ділення
         (0, 3),      # Нульове значення
-        (25, 4),     # Загальний випадок
+        (25, 4),     # Ще один загальний випадок
     ]
 )
 def test_split_integer_properties(value: int, number_of_parts: int) -> None:
